@@ -60,9 +60,9 @@ def parse(url,headers):
             "other images : ":other_images,
             }
     lst.append(dictionary)
-    with open("sample.json", "w") as outfile:
-        json.dump(lst, outfile)
-    return
+    dis_string=json.dumps(lst,indent=1)
+    f=open("sam.json","w")
+    f.write(dis_string)
 
 def parse_link(url,headers):
     result = requests.get(url,headers=headers)
