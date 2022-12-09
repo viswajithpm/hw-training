@@ -1,0 +1,28 @@
+Linux Basic Commands : 
+apt-get : helps in handling packages
+cd : change current working directory
+mkdir : make directory
+rm : remove files
+rmdir : remove directory
+chmode : change access mode of a file
+clear : clear the screen
+cp : used to copy file/directory
+pwd : print path of current working directory
+ls : list all items in the current working directory
+touch : create a blank file
+
+scrapy using apt:
+install : sudo apt-get install python-scrapy
+uninstall : sudo apt-get remove  python-scrapy
+
+scrapy using pip:
+install : pip install scrapy
+uninstall : pip uninstall scrapy
+
+created a python3 virtual environment and installed scrapy
+installed sublime text
+to open a existing/new file using nano : nano <filename>
+to install virtual environment : pip install virtualenv
+to create virtual environment : virtualenv <environment name>
+to activate virtual environment : source env/bin/activate
+to deactivate virtual environment : deactivate
