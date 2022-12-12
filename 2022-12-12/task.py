@@ -3,50 +3,75 @@ import json
 from datetime import date
 
 class Emp:
-	def __init__(self,eid,name):
-		self.eid=eid
-		self.name=name
-		self.lst=[]
-		self.dictionary={}
-
+	def __init__(self):
+		self.log={}
+		self.task_dic={}
+		self.task_list=[]
 	def login(self):
+		eid=input("Enter employee id:")
+		name=input("Enter employee name:")
 		login_time=datetime.datetime.now().isoformat().replace("T"," ")[0:16]
-		self.dictionary.update({
-			'name':self.name,
-			'id':self.eid,
-			'login_time':login_time,
-		})
+		print("Login successful")
+
+		self.log.update({
+			'id':eid,
+			'name':name,
+			'login':login_time
+			})	
 
 	def logout(self):
+		print("Logout successfully and created log file")
 		logout_time=datetime.datetime.now().isoformat().replace("T"," ")[0:16]
-		self.dictionary.update({
-			'logout_time':logout_time,
-		})
+
+		self.log.update({
+			'logout':logout_time
+			})
 		dt=date.today()
-		dict_str=json.dumps(self.dictionary,indent=1)
-		filename=f'{dt}_{self.name}.json'
+		dict_str=json.dumps(self.log,indent=1)
+		filename=f'{dt}.json'
 		file=open(filename,"w")
 		file.write(dict_str)
 
-	def addTask(self,*details):
-		for items in details:
-			self.lst.append(items)
-		self.dictionary.update({
-			'tasks':self.lst
-		})
+	def addTask(self):
+		title=input("Enter the Task Title: ")
+		description=input("Enter the description: ")
+		start_time=datetime.datetime.now().isoformat().replace("T"," ")[0:16]
+		e=int(input("Task added\n Press 1 when finished."))
 
-	def endTask(self,*details):
-		for items in details:
-			self.lst.append(items)
-		self.dictionary.update({
-			'tasks':self.lst
-		})
-		
-eid=input("Enter employee id:")
-name=input("Enter employee name:")
+		self.task_dic.update({
+			'title':title,
+			'description':description,
+			'start_time':start_time
+			})
 
-obj_eid=Emp(eid,name)
+		if e==1:
+			obj_eid.endTask()
+
+	def endTask(self):
+		end_time=datetime.datetime.now().isoformat().replace("T"," ")[0:16]
+		flag=input("Wheater the task was successful ?(Enter True or False)")
+
+		self.task_dic.update({
+			'end_time':end_time,
+			'successful':flag
+			})
+		self.task_list.append(str(self.task_dic))
+		self.log.update({
+			'task':self.task_list
+			})
+
+
+
+obj_eid=Emp()
 obj_eid.login()
-obj_eid.addTask("title","description","start")
-obj_eid.endTask("end","flag")
-obj_eid.logout()
+print("=====================")
+while True:
+	print("Enter a option:")
+	ch=int(input("1.AddTask\n2.Logout\n"))
+	if ch==1:
+		obj_eid.addTask()
+	elif ch==2:
+		obj_eid.logout()
+		break
+	else:
+		print("Enter a valid option:")
