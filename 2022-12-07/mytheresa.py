@@ -18,8 +18,8 @@ def parse(url,headers):
 
         price = amount.xpath('//div[contains(@class,"price-info pa1-rmm-price")]')
 
-        img = selector.css('img.gallery-image').xpath('@src').get()
-        img_url = "https:%s"%img
+        image = selector.css('img.gallery-image').xpath('@src').get()
+        image_url = "https:%s"%image
         
         sizes = []
         size_details=selector.xpath("//div[@class='product-shop'] //ul[@class='sizes'] //span/text()").getall()
@@ -30,15 +30,15 @@ def parse(url,headers):
         
         images = selector.css('img.lazyload').xpath('@data-src').getall()
         other_images = []
-        for img in images:
-            imgurl = "https:%s"%img
+        for image in images:
+            imageurl = "https:%s"%image
             other_images.append(imgurl)
         
         description = (str(product.css('p.pa1-rmm.product-description::text').get())) + ' '.join(product.xpath("//li[@class='pa1-rmm']/text()").getall())
         try:
             dictionary = {
             "breadcrumbs : ":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
-            "image url : ":img_url,
+            "image url : ":image_url,
             "brand : ":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
             "product name :":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
             "price : ":price.xpath('//div/span/span/text()').get(),
@@ -49,7 +49,7 @@ def parse(url,headers):
         except:
             dictionary = {
             "breadcrumbs : ":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
-            "image url : ":img_url,
+            "image url : ":image_url,
             "brand : ":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
             "product name :":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
             "old_price : ":price.xpath('//div/p[has-class("old-price")]/span/text()').get(),
@@ -59,9 +59,9 @@ def parse(url,headers):
             "description : ":description,
             "other images : ":other_images,
             }
-    lst.append(dictionary)
-    dis_string=json.dumps(lst,indent=1)
-    f=open("sam.json","w")
+    list1.append(dictionary)
+    dis_string=json.dumps(list1,indent=1)
+    f=open("mytheresa.json","w")
     f.write(dis_string)
 
 def parse_link(url,headers):
@@ -76,6 +76,6 @@ def parse_link(url,headers):
         if next_page is not None:
             parse_link(next_page,headers)
 
-lst=[]
+list1=[]
 parse_link(url=url,headers=headers)
 
