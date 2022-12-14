@@ -31,27 +31,27 @@ class Mytheresa:
             description = (str(product.css('p.pa1-rmm.product-description::text').get())) + ' '.join(product.xpath("//li[@class='pa1-rmm']/text()").getall())
             if price.xpath('//div/span/span/text()').get() is not None:
                 dictionary = {
-                "breadcrumbs : ":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
-                "image url : ":image_url,
-                "brand : ":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
-                "product name :":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
-                "price : ":price.xpath('//div/span/span/text()').get(),
-                "sizes : ":sizes,
-                "description : ":description,
-                "other images : ":other_images,
+                "breadcrumbs":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
+                "image url":image_url,
+                "brand":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
+                "product name":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
+                "price":price.xpath('//div/span/span/text()').get(),
+                "sizes":sizes,
+                "description":description,
+                "other images":other_images,
                 }
             else:
                 dictionary = {
-                "breadcrumbs : ":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
-                "image url : ":image_url,
-                "brand : ":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
-                "product name :":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
-                "old_price : ":price.xpath('//div/p[has-class("old-price")]/span/text()').get(),
-                "special_price : ":price.xpath('//div/p[has-class("special-price")]/span/text()').get(),
-                "discount : ":price.xpath('//span[has-class("price-reduction-notice")]/text()').get().replace("off","").strip(),
-                "sizes : ":sizes,
-                "description : ":description,
-                "other images : ":other_images,
+                "breadcrumbs":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
+                "image url":image_url,
+                "brand":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
+                "product name":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
+                "old_price":price.xpath('//div/p[has-class("old-price")]/span/text()').get(),
+                "special_price":price.xpath('//div/p[has-class("special-price")]/span/text()').get(),
+                "discount":price.xpath('//span[has-class("price-reduction-notice")]/text()').get().replace("off","").strip(),
+                "sizes":sizes,
+                "description":description,
+                "other images":other_images,
                 }
         list1.append(dictionary)
         dis_string=json.dumps(list1,indent=1)
