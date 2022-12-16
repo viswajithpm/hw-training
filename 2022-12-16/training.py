@@ -1,10 +1,11 @@
 import requests
 from parsel import Selector
 import json
+import csv
 
 class Olx:
     def __init__(self):
-        self.url = 'https://www.olx.in/api/relevance/v2/search?category=84&facet_limit=100&lang=en-IN&location=2001160&location_facet_limit=20&page=1&platform=web-desktop&size=40&user=1851487ee9fx3a22fd6d'
+        self.url = 'https://www.olx.in/api/relevance/v2/search?category=84&facet_limit=100&lang=en-IN&location=2001160&location_facet_limit=20&platform=web-desktop&size=40&user=1851487ee9fx3a22fd6d&page=1'
         self.headers={
             'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36',
             }
@@ -26,7 +27,11 @@ class Olx:
                     'title': item['title'],
                     'price': item['price']['value']['display']
                 }
-                print(json.dumps(details, indent=1))
+            next_page = data['metadata']['next_page_url']
+                # print(json.dumps(details, indent=1))
+                # with open('results.csv','a') as csv_file:
+                #     writer = csv.DictWriter(csv_file, fieldnames=details.keys())
+                #     writer.writerow(details)
 
 olx = Olx()
 olx.parse()
