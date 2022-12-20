@@ -1,0 +1,8 @@
+things were looked up today are:
+requests-learned to send requests, familirize with different http headers
+parsel - learned about Selector, CSS and Xpath selectors, getting data using selector
+python regular expressions - usage,search(),findall(),split(),sub(),metacharacters, 
+json - json module,dumps() method , conversion between JSON to python and python to JSON
+csv - reader,writer modules,DictWriter,DictReader converting csv to python dictionary and viceversa.
+pymongo - installed mongodb, tried to connect to the server
+scrapy - introduction,project creation,running of the project,Spider class and its components,response.follow() method.
