@@ -1,0 +1,54 @@
+Data loaded AJAX URL: https://2.rome.api.flipkart.com/api/4/page/fetch
+
+Request headers:
+	POST /api/4/page/fetch HTTP/1.1
+	Accept: */*
+	Accept-Encoding: gzip, deflate, br
+	Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+	Connection: keep-alive
+	Content-Length: 1422
+	Content-Type: application/json
+	Cookie: T=TI167214133506600272188687592192639837747987351919326603380947657680; _pxvid=842f48e7-85db-11ed-9383-76764648744b; K-ACTION=null; pxcts=37781738-8763-11ed-a5e8-507a5a675949; AMCVS_17EB401053DAF4840A490D4C%40AdobeOrg=1; AMCV_17EB401053DAF4840A490D4C%40AdobeOrg=-227196251%7CMCIDTS%7C19356%7CMCMID%7C82718145549326386932071648667154643982%7CMCAAMLH-1672746138%7C12%7CMCAAMB-1672914372%7CRKhpRz8krg2tLO6pguXWp5olkAcUniQYPHaMWWgdJ3xzPWQmdj0y%7CMCOPTOUT-1672316772s%7CNONE%7CMCAID%7CNONE; JSESSIONID=fcczw0voykhe1y0vk8bnaptjb; s_sq=flipkart-prd%3D%2526pid%253Dwww.flipkart.com%25253Amens-footwear%25253Asports-shoes%25253Apr%2526pidt%253D1%2526oid%253Dhttps%25253A%25252F%25252Fwww.flipkart.com%25252Fcampus-hurricane-running-shoes-men%25252Fp%25252Fitm0ea6214ceab01%25253Fpid%25253DSHOGB5422TFFWVYD%252526%2526ot%253DA; _px3=933bb9577890da61ec5c02207ee32a52b53e6b175f4f7754d3dfc7975a74ee05:rwIccXOp5lZ0xv0VvFxLpC5pdUqUsm8KDbkWxvxUuHZAp31P87TNNsMkKzNM2m8sZK5pvakuV2elc91BzOL+QQ==:1000:SWLjc54WuQrzDYMtXRcgrugBH0r8cEI4YohlBN8B0lQF7tsIryCEdtt6+Awj4EGmaYVMpoVV43U9QgGb9vFaf48wYRC41BwOVMifGoWecbpDRdOkZRJmTi1adkHik99iRP2o2IyL6wApLwQwEPn0LsePrPDn8ICEe/Wuia5rAs25P4mY8nX93gCpyGd4lc2DNed0G60JfSrp/t5GMni35w==; SN=VIDC1D683ECF604C0BA27295972F96522A.TOK6D6FB4A874C4417C8385B09199DCF2D8.1672311498.LO; S=d1t18Yz9kPz8/LjwgPz9OPz8/PyU8oHy887hlunzk4NaOkF7ydz9+x0fc+2JQzQDDZGmrdRsiU4bsKX+CXrcTihmqnA==
+	Host: 2.rome.api.flipkart.com
+	Origin: https://www.flipkart.com
+	Referer: https://www.flipkart.com/
+	Sec-Fetch-Dest: empty
+	Sec-Fetch-Mode: cors
+	Sec-Fetch-Site: same-site
+	User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36
+	X-User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36 FKUA/website/42/website/Desktop
+	sec-ch-ua: "Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"
+	sec-ch-ua-mobile: ?0
+	sec-ch-ua-platform: "Linux"
+
+Response headers: 
+	HTTP/1.1 200 OK
+	Server: nginx
+	Date: Thu, 29 Dec 2022 10:58:39 GMT
+	Content-Type: application/json
+	Transfer-Encoding: chunked
+	Access-Control-Allow-Origin: https://www.flipkart.com
+	Access-Control-Expose-Headers: X-BOT
+	Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE, PUT
+	Access-Control-Allow-Headers: X-ACK-RESPONSE,X-PARTNER-CONTEXT
+	Access-Control-Max-Age: 2592000
+	Access-Control-Allow-Credentials: true
+	X-BIFROST-Request-ID: a62dd20c-c1dd-488b-bd9a-2f10ef5de683
+	X-Request-ID: a62dd20c-c1dd-488b-bd9a-2f10ef5de683
+	Pragma: no-cache
+	x-payload-length: 333658
+	Cache-Control: private
+	X-Content-Language: en
+	Vary: Accept-Encoding, User-Agent
+	x-e-id: 10.52.130.46
+	Set-Cookie: S=d1t18QkgePz8gakM/Mz1rQT9hZWcnyaZyiCOakULUC0ITCSi4oNPhcUaXblPt9xnCokpKuXWl/Hb1UAFAWJdqKEOvXQ==;Version=1;Path=/;Domain=flipkart.com;Expires=Tue, 27-Jun-2023 10:58:39 GMT;Max-Age=15552000;Secure;HttpOnly;SameSite=None
+	Set-Cookie: SN=VIDC1D683ECF604C0BA27295972F96522A.TOK6D6FB4A874C4417C8385B09199DCF2D8.1672311498.LO;Version=1;Path=/;Domain=flipkart.com;Expires=Tue, 27-Jun-2023 10:58:39 GMT;Max-Age=15552000;Secure;HttpOnly;SameSite=None
+	content-encoding: gzip
+
+Response cookies:
+	Set-Cookie: S=d1t18QkgePz8gakM/Mz1rQT9hZWcnyaZyiCOakULUC0ITCSi4oNPhcUaXblPt9xnCokpKuXWl/Hb1UAFAWJdqKEOvXQ==;Version=1;Path=/;Domain=flipkart.com;Expires=Tue, 27-Jun-2023 10:58:39 GMT;Max-Age=15552000;Secure;HttpOnly;SameSite=None
+	Set-Cookie: SN=VIDC1D683ECF604C0BA27295972F96522A.TOK6D6FB4A874C4417C8385B09199DCF2D8.1672311498.LO;Version=1;Path=/;Domain=flipkart.com;Expires=Tue, 27-Jun-2023 10:58:39 GMT;Max-Age=15552000;Secure;HttpOnly;SameSite=None
+
+Request method type: POST
+Response status_code: 200
+Inspect and find catagory name: RESPONSE.pageData.pageTitle
