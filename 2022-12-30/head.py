@@ -21,7 +21,13 @@
 # 			conn.send(b'</pre></body></html>')
 # 			conn.close()
 
-import urllib
+# import urllib.request
+# from urllib.parse import *
 
-request_url = urllib.request.urlopen('https://www.geeksforgeeks.org/')
-print(request_url.read())
+# parse_url = urlparse('https://www.geeksforgeeks.org / python-langtons-ant/')
+# print(parse_url)
+# print('\n')
+# unparse_url = urlunparse(parse_url)
+# print(unparse_url)
+# request_url = urllib.request.urlopen('https://www.geeksforgeeks.org/')
+# print(request_url.read())
