@@ -32,14 +32,20 @@
 # request_url = urllib.request.urlopen('https://www.geeksforgeeks.org/')
 # print(request_url.read())
 
-import logging
+# import logging
 
-logging.basicConfig(filename="newfile.log",format='%(asctime)s %(message)s',filemode='w')
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
-logger.debug("Harmless debug message")
-logger.info("Just a information")
-logger.warning("It's a warning")
-logger.error("Error occured")
-logger.critical("Internet is down")
+# logging.basicConfig(filename="newfile.log",format='%(asctime)s %(message)s',filemode='w')
+# logger = logging.getLogger()
+# logger.setLevel(logging.DEBUG)
+# logger.debug("Harmless debug message")
+# logger.info("Just a information")
+# logger.warning("It's a warning")
+# logger.error("Error occured")
+# logger.critical("Internet is down")
+
+import ast
+
+code = ast.parse("print('Hello Learner! Welcome to Python')")
+print(code)
+exec(compile(code,filename="",mode="exec"))
 
