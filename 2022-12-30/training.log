@@ -1,0 +1,6 @@
+Things were looked up today:
+Anti scraping measures and evasion techniques:
+	IP blocking, Headers based blocking, Crawling pattern detection
+	Captcha verification, Javascript Validation
+done some basic implementations of urllib, ast, logging modules
+tried to improve the xpath writing
