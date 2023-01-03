@@ -1,6 +1,6 @@
 import requests
 from parsel import Selector
-import json
+import csv
 
 class Mytheresa:
 
@@ -9,6 +9,8 @@ class Mytheresa:
         self.headers={
         'user-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
         }
+        with open('mytheresa1.csv', 'w') as csv_file:
+            csv_file.write("breadcrumbs,image url,brand,product name,price,special_price,discount,sizes,description,other images\n")
 
     def parse(self, url):
         list1 = []
@@ -63,7 +65,7 @@ class Mytheresa:
                 "image url":image_url,
                 "brand":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
                 "product name":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
-                "old_price":price.xpath('//div/p[has-class("old-price")]/span/text()').get(),
+                "price":price.xpath('//div/p[has-class("old-price")]/span/text()').get(),
                 "special_price":price.xpath('//div/p[has-class("special-price")]/span/text()').get(),
                 "discount":price.xpath('//span[has-class("price-reduction-notice")]/text()').get().replace("off","").strip(),
                 "sizes":sizes,
@@ -71,11 +73,19 @@ class Mytheresa:
                 "other images":other_images,
 
                 }
-                
-        list1.append(dictionary)
-        dis_string=json.dumps(list1, indent=1)
-        f=open("mytheresa.json", "a")
-        f.write(dis_string)
+        with open('mytheresa1.csv','a') as csvfile:
+            fields = [
+            'breadcrumbs','image url','brand','product name','price',
+            'special_price','discount','sizes','description','other images'
+            ]
+            writer = csv.DictWriter(csvfile, fieldnames=fields)
+            writer.writerow(dictionary)
+            # writer.writeheader()
+
+        # list1.append(dictionary)
+        # dis_string=json.dumps(list1, indent=1)
+        # f=open("mytheresa.json", "a")
+        # f.write(dis_string)
 
     def parse_link(self, url):
 
