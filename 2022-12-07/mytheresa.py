@@ -9,8 +9,13 @@ class Mytheresa:
         self.headers={
         'user-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
         }
-        with open('mytheresa1.csv', 'w') as csv_file:
-            csv_file.write("breadcrumbs,image url,brand,product name,price,special_price,discount,sizes,description,other images\n")
+        self.fields = [
+        'breadcrumbs','image url','brand','product name','product id',
+        'price','special_price','discount','sizes','description','other images'
+        ]
+        with open('mytheresa2.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=self.fields)
+            writer.writeheader()
 
     def parse(self, url):
         list1 = []
@@ -22,7 +27,7 @@ class Mytheresa:
 
             amount = selector.xpath('//div[contains(@class,"product-shop")]')
             product = selector.xpath("//div[@class='main']")
-            price = amount.xpath('//div[contains(@class,"price-info pa1-rmm-price")]')
+            price = selector.xpath('//div[contains(@class,"price-info pa1-rmm-price")]')
 
             image = selector.xpath('//img[contains(@class,"gallery-image")]/@src').get()
             image_url = f"https:{image}"
@@ -43,7 +48,7 @@ class Mytheresa:
 
             description = (str(product.xpath('//p[contains(@class,"product-description")]/text()').get())) + ' '.join(product.xpath("//li[@class='pa1-rmm']/text()").getall())
 
-            if price.xpath('//div/span/span/text()').get() is not None:
+            if price.xpath('/div[contains(@class,"price-box")]/span/span/text()').get() is not None:
 
                 dictionary = {
 
@@ -51,7 +56,8 @@ class Mytheresa:
                 "image url":image_url,
                 "brand":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
                 "product name":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
-                "price":price.xpath('//div/span/span/text()').get(),
+                "product id": amount.xpath('//span[contains(@class,"h1")]/text()').get().replace('item no.\xa0',''),
+                "price":price.xpath('/div[contains(@class,"price-box")]/span/span/text()').get(),
                 "sizes":sizes,
                 "description":description,
                 "other images":other_images,
@@ -65,20 +71,18 @@ class Mytheresa:
                 "image url":image_url,
                 "brand":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
                 "product name":selector.xpath('//div[contains(@class,"product-name")]/span/text()').get(),
-                "price":price.xpath('//div/p[has-class("old-price")]/span/text()').get(),
-                "special_price":price.xpath('//div/p[has-class("special-price")]/span/text()').get(),
-                "discount":price.xpath('//span[has-class("price-reduction-notice")]/text()').get().replace("off","").strip(),
+                "product id": amount.xpath('//span[contains(@class,"h1")]/text()').get().replace('item no.\xa0',''),
+                "price":price.xpath('//div/p[contains(@class,"old-price")]/span/text()').get(),
+                "special_price":price.xpath('//div/p[contains(@class,"special-price")]/span/text()').get(),
+                "discount":price.xpath('//span[contains(@class,"price-reduction-notice")]/text()').get().replace("off","").strip(),
                 "sizes":sizes,
                 "description":description,
                 "other images":other_images,
 
                 }
-        with open('mytheresa1.csv','a') as csvfile:
-            fields = [
-            'breadcrumbs','image url','brand','product name','price',
-            'special_price','discount','sizes','description','other images'
-            ]
-            writer = csv.DictWriter(csvfile, fieldnames=fields)
+        with open('mytheresa2.csv','a') as csvfile:
+
+            writer = csv.DictWriter(csvfile, fieldnames=self.fields)
             writer.writerow(dictionary)
             # writer.writeheader()
 
