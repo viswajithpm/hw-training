@@ -5,14 +5,14 @@ import json
 class Mytheresa:
 
     def __init__(self):
-        self.url = 'https://www.mytheresa.com/int_en/men/shoes.html'
+
         self.headers={
         'user-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
         }
 
-    def parse(self):
+    def parse(self, url):
         list1 = []
-        result = requests.get(self.url, headers=self.headers)
+        result = requests.get(url=url, headers=self.headers)
 
         if result.status_code == 200:
             text = result.text
@@ -21,24 +21,30 @@ class Mytheresa:
             amount = selector.xpath('//div[contains(@class,"product-shop")]')
             product = selector.xpath("//div[@class='main']")
             price = amount.xpath('//div[contains(@class,"price-info pa1-rmm-price")]')
+
             image = selector.xpath('//img[contains(@class,"gallery-image")]/@src').get()
             image_url = f"https:{image}"
+
             sizes = []
-
-            size_details=selector.xpath('//ul[contains(@class,"sizes")]//span/text()').getall()
+            size_details = selector.xpath('//ul[contains(@class,"sizes")]//span/text()').getall()
             for size in size_details:
-                size = size.replace("/", " ").strip(" ").split("  ")
-                for i in size:
-                    sizes.append(i)
+                size = size.split('/')
+                for sze in size:
+                    if sze.strip():
+                        sizes.append(sze.strip())
 
-            images = selector.css('img.lazyload').xpath('@data-src').getall()
+            images = selector.xpath('//img[contains(@class,"gallery-image")]/@data-src').getall()
             other_images = []
             for image in images:
-                imageurl = "https:%s"%image
+                imageurl = f"https:{image}"
                 other_images.append(imageurl)
-            description = (str(product.css('p.pa1-rmm.product-description::text').get())) + ' '.join(product.xpath("//li[@class='pa1-rmm']/text()").getall())
+
+            description = (str(product.xpath('//p[contains(@class,"product-description")]/text()').get())) + ' '.join(product.xpath("//li[@class='pa1-rmm']/text()").getall())
+
             if price.xpath('//div/span/span/text()').get() is not None:
+
                 dictionary = {
+
                 "breadcrumbs":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
                 "image url":image_url,
                 "brand":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
@@ -47,9 +53,12 @@ class Mytheresa:
                 "sizes":sizes,
                 "description":description,
                 "other images":other_images,
+
                 }
             else:
+
                 dictionary = {
+
                 "breadcrumbs":selector.xpath('//div[contains(@class,"breadcrumbs")]//span/text()').getall(),
                 "image url":image_url,
                 "brand":selector.xpath('//div[contains(@class,"product-designer")]/span/a/text()').get(),
@@ -60,23 +69,27 @@ class Mytheresa:
                 "sizes":sizes,
                 "description":description,
                 "other images":other_images,
+
                 }
+                
         list1.append(dictionary)
         dis_string=json.dumps(list1, indent=1)
-        f=open("mytheresa.json", "w")
+        f=open("mytheresa.json", "a")
         f.write(dis_string)
 
-    def parse_link(self):
-        result = requests.get(self.url, headers=self.headers)
+    def parse_link(self, url):
+
+        result = requests.get(url=url, headers=self.headers)
         if result.status_code == 200:
             text = result.text
             selector1 = Selector(text=text)
             for link in selector1.xpath('//a[contains(@class,"product-image")]/@href'):
-                parse(link.get(),self.headers)
+                mytheresa.parse(link.get())
 
             next_page=selector1.xpath('//li[contains(@class,"next")]/a/@href').get()
             if next_page is not None:
-                parse_link(next_page, self.headers)
+                mytheresa.parse_link(next_page)
 
+url = 'https://www.mytheresa.com/int_en/men/shoes.html'
 mytheresa = Mytheresa()
-mytheresa.parse_link()
+mytheresa.parse_link(url)
