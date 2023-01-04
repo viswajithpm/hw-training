@@ -21,7 +21,7 @@ class Mytheresa:
         list1 = []
         result = requests.get(url=url, headers=self.headers)
         if result.status_code != 200:
-            pass
+            raise Exception('Page Not Found')
         else:
             selector = Selector(text=result.text)
 
@@ -75,11 +75,14 @@ class Mytheresa:
 
         result = requests.get(url=url, headers=self.headers)
         if result.status_code != 200:
-            pass
+            raise Exception("Page Not Found")
         else:
             selector1 = Selector(text=result.text)
             for link in selector1.xpath('//a[contains(@class,"product-image")]/@href').extract():
-                mytheresa.parse(link)
+                try:
+                    mytheresa.parse(link)
+                except:
+                    continue
 
         next_page=selector1.xpath('//li[contains(@class,"next")]/a/@href').extract_first()
         if next_page is not None:
