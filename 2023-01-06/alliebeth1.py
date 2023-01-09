@@ -1,19 +1,14 @@
 import requests
 from parsel import Selector
-import csv
+import json
 
 
 class Alliebeth:
 
 	def __init__(self):
-		self.fields = ['first_name','last_name','image_url','title', 'description', 'address', 'city', 'zip_code', 'state', 'agent_phone', 'agent_email', 'profile_url']
-		self.headers = {
+				self.headers = {
 		'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
 		}
-
-		with open('alliebeth.csv', 'w') as csvfile:
-			writer = csv.DictWriter(csvfile, fieldnames=self.fields)
-			writer.writeheader()
 
 	def parse(self,url):
 
@@ -38,25 +33,32 @@ class Alliebeth:
 				first_name = name.split(' ')[0]
 				last_name = name.split(' ')[1]
 
-			details = {
-		
-			"first_name": first_name,
-			"last_name": last_name,
-			"image_url": image_url,
-			"title": selector.xpath('//h2[@itemprop="jobTitle"]/text()').extract_first().strip(),
-			"description": description1,
-			"address": selector.xpath('//div[@itemprop="streetAddress"]/text()').extract_first(),
-			"city": selector.xpath('//span[@itemprop="addressLocality"]/text()').extract_first(),
-			"zip_code": selector.xpath('//span[@itemprop="postalCode"]/text()').extract_first(),
-			"state": selector.xpath('//span[@itemprop="addressRegion"]/text()').extract_first(),
-			"agent_phone": selector.xpath('//a[contains(@class,"o-phone-number")]/text()').extract_first(),
-			"agent_email": selector.xpath('//a[contains(@class,"listing-item__agent-email-address")]/text()').extract_first(),
-			"profile_url": url,
+
+			fields = {
+			'country': 'United states',
+			'first_name': first_name,
+			'middle_name': "",
+			'last_name': last_name,
+			'image_url': image_url,
+			'title': selector.xpath('//h2[@itemprop="jobTitle"]/text()').extract_first().strip(),
+			'office_name': "",
+			'description': description1,
+			'languages': "",
+			'address': selector.xpath('//div[@itemprop="streetAddress"]/text()').extract_first(),
+			'city': selector.xpath('//span[@itemprop="addressLocality"]/text()').extract_first(),
+			'zip_code': selector.xpath('//span[@itemprop="postalCode"]/text()').extract_first(),
+			'state': selector.xpath('//span[@itemprop="addressRegion"]/text()').extract_first(),
+			'agent_phone': selector.xpath('//a[contains(@class,"o-phone-number")]/text()').extract_first(),
+			'office_phone': "",
+			'social': "",
+			'website': "",
+			'agent_email': selector.xpath('//a[contains(@class,"listing-item__agent-email-address")]/text()').extract_first(),
+			'profile_url': url,
 			}
 
-			with open('alliebeth.csv','a') as csvfile:
-				writer = csv.DictWriter(csvfile,fieldnames=self.fields)
-				writer.writerow(details)
+			field_string = json.dumps(fields)
+			json_file = open('alliebeth.json','a')
+			json_file.write(field_string+"\n")
 
 
 	def parse_link(self,url):
