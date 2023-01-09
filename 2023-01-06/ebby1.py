@@ -57,7 +57,7 @@ class Ebby():
 		'profile_url': url,
 		}
 
-		dict_str = john.dumps(dictionary)
+		dict_str = json.dumps(details)
 		json_file = open('ebby.json','a')
 		json_file.write(dict_str)
 
