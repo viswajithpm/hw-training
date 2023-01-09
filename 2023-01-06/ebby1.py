@@ -17,7 +17,11 @@ class Ebby():
 
 		names = selector.xpath('//div[@class="rng-bio-account-content"]//h1/text()').extract_first().split(' ')
 		
-		description = selector.xpath('//section[contains(@class,"description")]//p/text()')
+		description = selector.xpath('//section[contains(@class,"description")]//p/text()').extract()
+		if not description:
+			description = ""
+		else:
+			description = ' '.join(description)
 		contact = selector.xpath('//section[@class="rng-bio-account-details"]//a/text()').extract()
 		office = selector.xpath('//section[@class="rng-bio-account-content-office"]//strong/text()').extract_first().split('|')
 		address = selector.xpath('//section[@class="rng-bio-account-content-office"]//div[2]/text()').extract_first().strip().replace(',','').split(' ')
@@ -43,7 +47,7 @@ class Ebby():
 		'image_url': selector.xpath('//div[@class="rng-bio-account-slider"]//img/@src').extract_first(),
 		'title': selector.xpath('//section[@class="rng-bio-account-content-office"]//div//span/text()').extract_first(),
 		'office_name': office[0].strip(),
-		'description': selector.xpath('//section[contains(@class,"description")]//p/text()').extract(),
+		'description': description,
 		'languages': "",
 		'address': adrs.strip(),
 		'city': address[-3],
@@ -52,7 +56,7 @@ class Ebby():
 		'agent_phone': contact[0].replace(' ',''),
 		'office_phone': "",
 		'social': "",
-		'website': selector.xpath('//a[contains(text(),"Visit my site")]/@href').extract_first(),
+		'website': selector.xpath('//a[containscontact[1].strip()(text(),"Visit my site")]/@href').extract_first(),
 		'agent_email': contact[1].strip(),
 		'profile_url': url,
 		}
