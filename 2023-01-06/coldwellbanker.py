@@ -29,8 +29,9 @@ class ColdwellBanker():
 			last_name = names[1]
 
 		title = selector.xpath('//span[contains(@id,"agent-profile")]//span/text()').extract_first()
-		languge = selector.xpath('//ul[contains(@class,"languages")]/li/text()')
-		address = selector.xpath('https://docs.python.org/3/library/xml.etree.elementtree.html').extract()	
+		languge = selector.xpath('//ul[contains(@class,"languages")]/li/text()').extract()
+		address = selector.xpath('').extract()
+		phone = selector.xpath('//div/a[contains(@href,"tel")]/text()').extract()
 		
 
 		
