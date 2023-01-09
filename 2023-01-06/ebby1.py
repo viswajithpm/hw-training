@@ -1,18 +1,14 @@
 import requests
 from parsel import Selector
-import csv
+import json
 
 
 class Ebby():
 
 	def __init__(self):
-		self.fields = ['country','first_name','middle_name','last_name','image_url','title', 'office_name', 'description', 'languages','address', 'city', 'zip_code', 'state', 'agent_phone','office_phone', 'social','website', 'agent_email', 'profile_url']
 		self.headers = {
 		'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
 		}
-		with open('ebby.csv','w') as csvfile:
-			writer = csv.DictWriter(csvfile, fieldnames=self.fields)
-			writer.writeheader()
 
 	def parse(self,url):
 		response = requests.get(url=url, headers=self.headers)
@@ -39,10 +35,6 @@ class Ebby():
 		for adr in address[:-3]:
 			adrs += adr+" "
 
-
-		
-		
-
 		details = {
 		'country': 'United states',
 		'first_name': first_name,
@@ -64,9 +56,10 @@ class Ebby():
 		'agent_email': contact[1].strip(),
 		'profile_url': url,
 		}
-		with open('ebby.csv','a') as csvfile:
-			writer = csv.DictWriter(csvfile, fieldnames=self.fields)
-			writer.writerow(details)
+
+		dict_str = john.dumps(dictionary)
+		json_file = open('ebby.json','a')
+		json_file.write(dict_str)
 
 
 
